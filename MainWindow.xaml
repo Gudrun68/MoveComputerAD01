@@ -1,0 +1,83 @@
+﻿<Window x:Class="MoveComputerAD01.MainWindow"  
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+       Title="AD Explorer und Computer Mover" Height="600" Width="1000">  
+   <Grid>  
+       <Grid.ColumnDefinitions>  
+           <ColumnDefinition Width="*" MinWidth="250"/>  
+           <ColumnDefinition Width="8"/> <!-- Removed duplicate 'Width' property -->  
+           <ColumnDefinition Width="2*" MinWidth="300"/>  
+       </Grid.ColumnDefinitions>  
+
+       <Grid.RowDefinitions>  
+           <RowDefinition Height="*"/>  
+           <RowDefinition Height="Auto" MinHeight="40"/>  
+           <RowDefinition Height="Auto" MinHeight="100"/>  
+       </Grid.RowDefinitions>
+
+        <!-- Linke TreeView: AD-Struktur -->
+        <TreeView Grid.Column="0" Grid.Row="0" Name="ADTreeViewControl" Margin="5"
+                  Drop="ADTreeView_Drop" 
+                  PreviewMouseLeftButtonDown="ADTreeView_PreviewMouseLeftButtonDown"
+                  AllowDrop="True">
+            <TreeView.Resources>
+                <Style TargetType="TreeViewItem">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#FF0078D4"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TreeView.Resources>
+        </TreeView>
+
+        <!-- Trenner -->
+        <Separator Grid.Column="1" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
+
+        <!-- Rechts: Ziel-OU Baum -->
+        <GroupBox Grid.Column="2" Grid.Row="0" Header="Ziel-OU auswählen" Margin="5">
+            <TreeView Name="OuTreeViewControl" Margin="5">
+                <TreeView.Resources>
+                    <Style TargetType="TreeViewItem">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#FF0078D4"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TreeView.Resources>
+            </TreeView>
+        </GroupBox>  
+
+       <!-- Button Zeile -->
+       <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" 
+                   Orientation="Horizontal" 
+                   HorizontalAlignment="Center" 
+                   Margin="5">
+           <Button Content="Computer verschieben"  
+                   Padding="15,8"  
+                   Margin="5"
+                   Background="#FF0078D4"
+                   Foreground="White"
+                   BorderBrush="#FF005A9E"
+                   Click="MoveComputerButton_Click" />
+           <Button Content="Abbrechen"  
+                   Padding="15,8"  
+                   Margin="5"
+                   Background="#FFE81123"
+                   Foreground="White"
+                   BorderBrush="#FFD13438"
+                   Click="CancelButton_Click" />
+       </StackPanel>  
+
+       <!-- Log Bereich -->  
+       <GroupBox Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Header="Log" Margin="5">  
+           <TextBox Name="LogTextBox" IsReadOnly="True"   
+                    VerticalScrollBarVisibility="Auto"   
+                    TextWrapping="Wrap"   
+                    HorizontalScrollBarVisibility="Auto" />  
+       </GroupBox>  
+   </Grid>  
+</Window>
