@@ -69,7 +69,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Classes\Utilities.cs" />
+    <Compile Include="Utilities\Utilities.cs" />
     <Compile Include="Dialogs\CredentialsDialog.xaml.cs">
       <DependentUpon>CredentialsDialog.xaml</DependentUpon>
       <SubType>Code</SubType>

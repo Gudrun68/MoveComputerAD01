@@ -15,7 +15,7 @@ Ein WPF-basiertes Tool zum Verwalten und Verschieben von Computerobjekten in Act
 
 ```
 MoveComputerAD01/
-├── Classes/           # Utility-Klassen
+├── Utilities/        # Utility-Klassen und Helper-Funktionen
 ├── Dialogs/          # UI-Dialoge (Credentials)
 ├── EventHandlers/    # Event-Handler Logic
 ├── Models/           # Datenmodelle

@@ -16,7 +16,7 @@ Das AD Computer Mover Projekt folgt modernen Software-Design-Prinzipien:
 
 ```
 MoveComputerAD01/
-├── Classes/              # Utility und Helper-Klassen
+├── Utilities/           # Utility und Helper-Klassen
 │   └── Utilities.cs     # Allgemeine Hilfsfunktionen
 ├── Dialogs/             # UI-Dialoge
 │   ├── CredentialsDialog.xaml

@@ -3,7 +3,7 @@ using System.Security.Principal;
 using System.Windows.Controls;
 using MoveComputerAD01.Models;
 
-namespace MoveComputerAD01.Classes
+namespace MoveComputerAD01.Utilities
 {
     /// <summary>
     /// Utility-Funktionen für die Anwendung

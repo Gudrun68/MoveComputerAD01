@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using MoveComputerAD01.Services;
 using MoveComputerAD01.EventHandlers;
-using MoveComputerAD01.Classes;
+using MoveComputerAD01.Utilities;
 using MoveComputerAD01.Dialogs;
 
 namespace MoveComputerAD01
@@ -68,10 +68,10 @@ namespace MoveComputerAD01
             {
                 // Benutzer-Informationen loggen
                 LogMessage("=== AD Computer Mover gestartet ===");
-                LogMessage(Utilities.GetCurrentUserInfo());
-                LogMessage($"Administrator-Rechte: {(Utilities.IsUserAdministrator() ? "Ja" : "Nein")}");
+                LogMessage(MoveComputerAD01.Utilities.Utilities.GetCurrentUserInfo());
+                LogMessage($"Administrator-Rechte: {(MoveComputerAD01.Utilities.Utilities.IsUserAdministrator() ? "Ja" : "Nein")}");
 
-                if (!Utilities.IsUserAdministrator())
+                if (!MoveComputerAD01.Utilities.Utilities.IsUserAdministrator())
                 {
                     LogMessage("⚠️ WARNUNG: Anwendung läuft nicht als Administrator.");
                     LogMessage("Dies kann zu Berechtigungsproblemen beim Verschieben führen.");
@@ -171,13 +171,13 @@ namespace MoveComputerAD01
                 
                 // AD-Struktur laden (mit Computern)
                 var adStructure = _adService.LoadADStructure();
-                Utilities.PopulateTreeView(ADTreeViewControl, adStructure, showComputers: true);
+                MoveComputerAD01.Utilities.Utilities.PopulateTreeView(ADTreeViewControl, adStructure, showComputers: true);
                 
                 LogMessage($"AD-Struktur geladen: {adStructure.Count} Objekte");
 
                 // OU-Struktur laden (nur OUs mit Computern)
                 var ouStructure = _adService.LoadOUStructure();
-                Utilities.PopulateTreeView(OuTreeViewControl, ouStructure, showComputers: false);
+                MoveComputerAD01.Utilities.Utilities.PopulateTreeView(OuTreeViewControl, ouStructure, showComputers: false);
                 
                 LogMessage($"OU-Struktur geladen: {ouStructure.Count} OUs");
             }
