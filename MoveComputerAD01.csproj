@@ -20,6 +20,8 @@
     <!-- <ApplicationIcon>app.ico</ApplicationIcon> -->
     <StartupObject>MoveComputerAD01.App</StartupObject>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <!-- Anwendungssymbol -->
+    <ApplicationIcon>app.ico</ApplicationIcon>
     <PublishUrl>\\dc-01\NETLOGON\MoveComputerAD01\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
@@ -40,8 +42,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <!-- Anwendungssymbol -->
-    <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
