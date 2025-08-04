@@ -1,3 +1,0 @@
-# Icon-Datei Platzhalter
-# Eine echte .ico Datei sollte hier platziert werden
-# Kann mit Online-Tools wie favicon.io erstellt werden

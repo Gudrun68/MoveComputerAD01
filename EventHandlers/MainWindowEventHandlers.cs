@@ -13,7 +13,7 @@ namespace MoveComputerAD01.EventHandlers
     /// </summary>
     public class MainWindowEventHandlers
     {
-        #region Private Fields
+        #region Private Felder
 
         private readonly MainWindow _mainWindow;
         private readonly ActiveDirectoryService _adService;
@@ -21,7 +21,7 @@ namespace MoveComputerAD01.EventHandlers
 
         #endregion
 
-        #region Constructor
+        #region Konstruktor
 
         /// <summary>
         /// Initialisiert die Event Handler
@@ -36,7 +36,7 @@ namespace MoveComputerAD01.EventHandlers
 
         #endregion
 
-        #region Button Event Handlers
+        #region Button Event Handler
 
         /// <summary>
         /// Computer verschieben Button wurde geklickt

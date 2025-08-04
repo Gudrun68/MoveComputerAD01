@@ -7,7 +7,7 @@ namespace MoveComputerAD01.Dialogs
     /// </summary>
     public partial class CredentialsDialog : Window
     {
-        #region Properties
+        #region Eigenschaften
 
         /// <summary>
         /// Eingegebene Domäne
@@ -26,7 +26,7 @@ namespace MoveComputerAD01.Dialogs
 
         #endregion
 
-        #region Constructor
+        #region Konstruktor
 
         /// <summary>
         /// Initialisiert einen neuen CredentialsDialog
@@ -41,7 +41,7 @@ namespace MoveComputerAD01.Dialogs
 
         #endregion
 
-        #region Event Handlers
+        #region Event Handler
 
         /// <summary>
         /// OK-Button wurde geklickt

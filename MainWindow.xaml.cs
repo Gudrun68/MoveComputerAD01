@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using MoveComputerAD01.Services;
@@ -13,14 +13,14 @@ namespace MoveComputerAD01
     /// </summary>
     public partial class MainWindow : Window
     {
-        #region Private Fields
+        #region Private Felder
 
         private ActiveDirectoryService _adService;
         private MainWindowEventHandlers _eventHandlers;
 
         #endregion
 
-        #region Public Properties
+        #region Öffentliche Eigenschaften
 
         /// <summary>
         /// TreeView für AD-Struktur (öffentlich für Event Handler)
@@ -34,7 +34,7 @@ namespace MoveComputerAD01
 
         #endregion
 
-        #region Constructor
+        #region Konstruktor
 
         /// <summary>
         /// Initialisiert das Hauptfenster
@@ -57,7 +57,7 @@ namespace MoveComputerAD01
 
         #endregion
 
-        #region Initialization
+        #region Initialisierung
 
         /// <summary>
         /// Initialisiert die Anwendung
@@ -68,10 +68,10 @@ namespace MoveComputerAD01
             {
                 // Benutzer-Informationen loggen
                 LogMessage("=== AD Computer Mover gestartet ===");
-                LogMessage(MoveComputerAD01.Utilities.Utilities.GetCurrentUserInfo());
-                LogMessage($"Administrator-Rechte: {(MoveComputerAD01.Utilities.Utilities.IsUserAdministrator() ? "Ja" : "Nein")}");
+                LogMessage(Utilities.Utilities.GetCurrentUserInfo());
+                LogMessage($"Administrator-Rechte: {(Utilities.Utilities.IsUserAdministrator() ? "Ja" : "Nein")}");
 
-                if (!MoveComputerAD01.Utilities.Utilities.IsUserAdministrator())
+                if (!Utilities.Utilities.IsUserAdministrator())
                 {
                     LogMessage("⚠️ WARNUNG: Anwendung läuft nicht als Administrator.");
                     LogMessage("Dies kann zu Berechtigungsproblemen beim Verschieben führen.");
@@ -158,7 +158,7 @@ namespace MoveComputerAD01
 
         #endregion
 
-        #region TreeView Management
+        #region TreeView Verwaltung
 
         /// <summary>
         /// Lädt beide TreeViews
@@ -171,13 +171,13 @@ namespace MoveComputerAD01
                 
                 // AD-Struktur laden (mit Computern)
                 var adStructure = _adService.LoadADStructure();
-                MoveComputerAD01.Utilities.Utilities.PopulateTreeView(ADTreeViewControl, adStructure, showComputers: true);
+                Utilities.Utilities.PopulateTreeView(ADTreeViewControl, adStructure, showComputers: true);
                 
                 LogMessage($"AD-Struktur geladen: {adStructure.Count} Objekte");
 
                 // OU-Struktur laden (nur OUs mit Computern)
                 var ouStructure = _adService.LoadOUStructure();
-                MoveComputerAD01.Utilities.Utilities.PopulateTreeView(OuTreeViewControl, ouStructure, showComputers: false);
+                Utilities.Utilities.PopulateTreeView(OuTreeViewControl, ouStructure, showComputers: false);
                 
                 LogMessage($"OU-Struktur geladen: {ouStructure.Count} OUs");
             }
@@ -208,7 +208,7 @@ namespace MoveComputerAD01
 
         #endregion
 
-        #region Event Handlers
+        #region Event Handler
 
         /// <summary>
         /// Computer verschieben Button Click
@@ -224,14 +224,6 @@ namespace MoveComputerAD01
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             _eventHandlers?.CancelButton_Click(sender, e);
-        }
-
-        /// <summary>
-        /// TreeView Drop Event
-        /// </summary>
-        private void ADTreeView_Drop(object sender, System.Windows.DragEventArgs e)
-        {
-            _eventHandlers?.ADTreeView_Drop(sender, e);
         }
 
         /// <summary>
@@ -266,9 +258,25 @@ namespace MoveComputerAD01
             _eventHandlers?.OuTreeView_DragOver(sender, e);
         }
 
+        /// <summary>
+        /// Hilfe-Button Click
+        /// </summary>
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            _eventHandlers?.HelpButton_Click(sender, e);
+        }
+
+        /// <summary>
+        /// Beenden-Button Click
+        /// </summary>
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            _eventHandlers?.ExitButton_Click(sender, e);
+        }
+
         #endregion
 
-        #region Logging
+        #region Protokollierung
 
         /// <summary>
         /// Fügt eine Nachricht zum Log hinzu
@@ -286,91 +294,7 @@ namespace MoveComputerAD01
             }
             catch
             {
-                // Logging-Fehler ignorieren
-            }
-        }
-
-        /// <summary>
-        /// Event-Handler für den Beenden-Button
-        /// </summary>
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                LogMessage("Anwendung wird beendet...");
-                
-                // Sauberes Schließen der Anwendung
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                LogMessage($"Fehler beim Beenden: {ex.Message}");
-                // Auch bei Fehler die Anwendung schließen
-                Application.Current.Shutdown();
-            }
-        }
-
-        /// <summary>
-        /// Event-Handler für den Hilfe-Button
-        /// </summary>
-        private void HelpButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                LogMessage("Öffne Benutzerhandbuch...");
-                
-                // Pfad zur HTML-Version der Benutzeranleitung
-                var helpPath = System.IO.Path.Combine(
-                    System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location),
-                    "docs", "Benutzerhandbuch.html");
-                
-                // Fallback: Markdown-Version
-                var markdownPath = System.IO.Path.Combine(
-                    System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location),
-                    "docs", "Benutzerhandbuch.md");
-                
-                if (System.IO.File.Exists(helpPath))
-                {
-                    // HTML-Version öffnen
-                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
-                    {
-                        FileName = helpPath,
-                        UseShellExecute = true
-                    });
-                    LogMessage("Benutzerhandbuch (HTML) geöffnet.");
-                }
-                else if (System.IO.File.Exists(markdownPath))
-                {
-                    // Markdown-Version öffnen
-                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
-                    {
-                        FileName = markdownPath,
-                        UseShellExecute = true
-                    });
-                    LogMessage("Benutzerhandbuch (Markdown) geöffnet.");
-                }
-                else
-                {
-                    // Online-Version öffnen
-                    var onlineUrl = "https://github.com/Gudrun68/MoveComputerAD01/blob/main/docs/Benutzerhandbuch.md";
-                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
-                    {
-                        FileName = onlineUrl,
-                        UseShellExecute = true
-                    });
-                    LogMessage("Online-Benutzerhandbuch geöffnet.");
-                }
-            }
-            catch (Exception ex)
-            {
-                LogMessage($"Fehler beim Öffnen der Hilfe: {ex.Message}");
-                MessageBox.Show(
-                    "Die Hilfe konnte nicht geöffnet werden.\n\n" +
-                    "Benutzerhandbuch online verfügbar unter:\n" +
-                    "https://github.com/Gudrun68/MoveComputerAD01/blob/main/docs/Benutzerhandbuch.md",
-                    "Hilfe",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information);
+                // Protokollierung-Fehler ignorieren
             }
         }
 
