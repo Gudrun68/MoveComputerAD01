@@ -8,6 +8,7 @@ namespace MoveComputerAD01.Models
     public enum ADObjectType
     {
         OrganizationalUnit,
+        Container,
         Computer,
         User
     }

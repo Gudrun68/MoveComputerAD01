@@ -91,6 +91,19 @@ namespace MoveComputerAD01.Services
                                 Children = LoadADStructure(child.Path)
                             });
                         }
+                        else if (child.SchemaClassName == "container" && 
+                                (child.Name.Equals("CN=Computers", StringComparison.OrdinalIgnoreCase) ||
+                                 child.Name.Equals("CN=Users", StringComparison.OrdinalIgnoreCase)))
+                        {
+                            // Standard-Container (Computers, Users) mit Computer-Objekten laden
+                            objects.Add(new ADObject
+                            {
+                                Name = child.Name,
+                                Path = child.Path,
+                                Type = ADObjectType.Container,
+                                Children = LoadADStructure(child.Path)
+                            });
+                        }
                         else if (child.SchemaClassName == "computer")
                         {
                             objects.Add(new ADObject
@@ -135,6 +148,20 @@ namespace MoveComputerAD01.Services
                                 Name = child.Name,
                                 Path = child.Path,
                                 Type = ADObjectType.OrganizationalUnit,
+                                Children = LoadOUStructure(child.Path)
+                            });
+                        }
+                        else if (child.SchemaClassName == "container" && 
+                                (child.Name.Equals("CN=Computers", StringComparison.OrdinalIgnoreCase) ||
+                                 child.Name.Equals("CN=Users", StringComparison.OrdinalIgnoreCase)) &&
+                                (HasComputers(child) || HasComputersRecursive(child)))
+                        {
+                            // Standard-Container (Computers, Users) die Computer enthalten
+                            objects.Add(new ADObject
+                            {
+                                Name = child.Name,
+                                Path = child.Path,
+                                Type = ADObjectType.Container,
                                 Children = LoadOUStructure(child.Path)
                             });
                         }

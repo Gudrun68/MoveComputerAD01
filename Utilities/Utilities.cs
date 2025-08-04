@@ -92,6 +92,15 @@ namespace MoveComputerAD01.Utilities
                 case ADObjectType.OrganizationalUnit:
                     item.Header = adObject.Name;
                     break;
+                case ADObjectType.Container:
+                    // Container mit speziellem Icon kennzeichnen
+                    if (adObject.Name.Contains("Computers"))
+                        item.Header = "📦 " + adObject.Name.Replace("CN=", "");
+                    else if (adObject.Name.Contains("Users"))
+                        item.Header = "👥 " + adObject.Name.Replace("CN=", "");
+                    else
+                        item.Header = "📁 " + adObject.Name.Replace("CN=", "");
+                    break;
                 default:
                     item.Header = adObject.Name;
                     break;
