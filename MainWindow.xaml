@@ -70,6 +70,13 @@
                    Foreground="White"
                    BorderBrush="#FFD13438"
                    Click="CancelButton_Click" />
+           <Button Content="Beenden"  
+                   Padding="15,8"  
+                   Margin="5"
+                   Background="#FF6C757D"
+                   Foreground="White"
+                   BorderBrush="#FF5A6268"
+                   Click="ExitButton_Click" />
        </StackPanel>  
 
        <!-- Log Bereich -->  

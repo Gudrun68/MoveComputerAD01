@@ -266,6 +266,26 @@ namespace MoveComputerAD01
             }
         }
 
+        /// <summary>
+        /// Event-Handler für den Beenden-Button
+        /// </summary>
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                LogMessage("Anwendung wird beendet...");
+                
+                // Sauberes Schließen der Anwendung
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                LogMessage($"Fehler beim Beenden: {ex.Message}");
+                // Auch bei Fehler die Anwendung schließen
+                Application.Current.Shutdown();
+            }
+        }
+
         #endregion
     }
 }
