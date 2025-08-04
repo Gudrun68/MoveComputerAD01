@@ -9,6 +9,7 @@ Ein WPF-basiertes Tool zum Verwalten und Verschieben von Computerobjekten in Act
 - **Drag & Drop Funktionalität**: Einfaches Verschieben von Computern zwischen OUs
 - **Mehrfache Fallback-Strategien**: DirectoryServices + PowerShell Integration
 - **Umfassende Protokollierung**: Detaillierte Logs aller Operationen
+- **Benutzerfreundliche Buttons**: Computer verschieben, Abbrechen, Beenden
 - **Professionelle Architektur**: Service-orientierte Struktur mit Separation of Concerns
 
 ## 🏗️ Architektur

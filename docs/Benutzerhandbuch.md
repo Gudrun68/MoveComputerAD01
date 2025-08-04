@@ -37,7 +37,7 @@ Nach erfolgreicher Anmeldung sehen Sie das Hauptfenster:
 ┌─────────────────────────────────────────────────────────────┐
 │ AD Computer Mover                                    [_][□][×]│
 ├─────────────────────────────────────────────────────────────┤
-│ [Verbinden] [Computer verschieben] [Aktualisieren] [Abbrechen]│
+│ [Computer verschieben] [Abbrechen] [Beenden]                │
 ├─────────────────┬───────────────────────────────────────────┤
 │ 📁 AD-Struktur │ 🏢 Organisationseinheiten               │
 │ ├─OU1          │ ├─ Computers                             │
@@ -87,6 +87,11 @@ Nach erfolgreicher Anmeldung sehen Sie das Hauptfenster:
 ### Abbrechen-Button
 - **Zweck**: Laufende Operationen stoppen
 - **Wann verwenden**: Bei hängenden Vorgängen
+
+### Beenden-Button
+- **Zweck**: Anwendung sauber schließen
+- **Wann verwenden**: Wenn Sie die Arbeit beendet haben
+- **Funktion**: Schließt die Anwendung ordnungsgemäß mit Cleanup
 
 ## 📋 Protokoll verstehen
 
@@ -198,6 +203,7 @@ Fehlermeldung: [Exakte Meldung]
 | Computer wird nicht angezeigt | Aktualisieren-Button drücken |
 | Drag & Drop funktioniert nicht | Button-Methode verwenden |
 | Anwendung hängt | Abbrechen-Button drücken |
+| Anwendung soll geschlossen werden | Beenden-Button drücken |
 | Keine Berechtigung | IT-Administrator kontaktieren |
 
 ---

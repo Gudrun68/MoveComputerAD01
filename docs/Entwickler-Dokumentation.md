@@ -240,7 +240,9 @@ steps:
 ```xml
 <!-- Naming Convention -->
 <TreeView x:Name="ADTreeViewControl" />
-<Button x:Name="ConnectButton" Content="Verbinden" />
+<Button x:Name="MoveButton" Content="Computer verschieben" />
+<Button x:Name="CancelButton" Content="Abbrechen" />
+<Button x:Name="ExitButton" Content="Beenden" />
 
 <!-- Styling -->
 <Style TargetType="TreeViewItem">
