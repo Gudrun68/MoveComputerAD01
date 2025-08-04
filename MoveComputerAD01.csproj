@@ -14,6 +14,30 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    
+    <!-- ClickOnce Veröffentlichungseinstellungen -->
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>2.2.0.1</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardShown>false</PublishWizardShown>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    
+    <!-- Anwendungsmetadaten -->
+    <ProductName>AD Computer Mover</ProductName>
+    <PublisherName>LPS-Berlin IT-Abteilung</PublisherName>
+    <SuiteName>LPS-Berlin AD Tools</SuiteName>
+    <!-- <ApplicationIcon>app.ico</ApplicationIcon> -->
+    <StartupObject>MoveComputerAD01.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -115,5 +139,37 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
   </ItemGroup>
+  
+  <!-- ClickOnce Bootstrapper Packages -->
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  
+  <!-- Dokumentation und Hilfe-Dateien -->
+  <ItemGroup>
+    <Content Include="docs\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  
+  <!-- Post-Build Events für ClickOnce -->
+  <Target Name="AfterBuild">
+    <Message Text="Copying documentation files..." />
+    <ItemGroup>
+      <DocsFiles Include="docs\**\*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(DocsFiles)" DestinationFolder="$(OutputPath)docs\%(RecursiveDir)" SkipUnchangedFiles="true" />
+  </Target>
+
 </Project>
