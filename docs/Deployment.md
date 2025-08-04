@@ -13,16 +13,15 @@ ClickOnce bietet automatische Updates und einfache Installation.
 #### In Visual Studio:
 1. **Rechtsklick auf Projekt** → "Veröffentlichen..."
 2. **Veröffentlichungsort wählen**:
-   - **Netzwerkfreigabe**: `\\server\share\MoveComputerAD01\`
-   - **Webserver**: `https://intranet.lps-berlin.de/apps/MoveComputerAD01/`
-   - **FTP-Server**: `ftp://ftp.lps-berlin.de/apps/`
-   - **Lokaler Pfad**: `C:\Deploy\MoveComputerAD01\`
+   - **Netzwerkfreigabe**: `\\dc-01\NETLOGON\MoveComputerAD01`
+    - **Lokaler Pfad**: `C:\Deploy\MoveComputerAD01\`
 
 3. **Konfiguration**:
    - ✅ **Online/Offline**: Online und Offline verfügbar
    - ✅ **Updates**: Automatisch bei Start prüfen
    - ✅ **Voraussetzungen**: .NET Framework 4.8
    - ✅ **Sicherheit**: Vollvertrauen erforderlich
+   - ✅ **Icon**: Anwendungsicon (app.ico) enthalten
 
 #### Über PowerShell:
 ```powershell
