@@ -17,9 +17,8 @@
 
         <!-- Linke TreeView: AD-Struktur -->
         <TreeView Grid.Column="0" Grid.Row="0" Name="ADTreeViewControl" Margin="5"
-                  Drop="ADTreeView_Drop" 
                   PreviewMouseLeftButtonDown="ADTreeView_PreviewMouseLeftButtonDown"
-                  AllowDrop="True">
+                  MouseMove="ADTreeView_MouseMove">
             <TreeView.Resources>
                 <Style TargetType="TreeViewItem">
                     <Style.Triggers>
@@ -37,7 +36,10 @@
 
         <!-- Rechts: Ziel-OU Baum -->
         <GroupBox Grid.Column="2" Grid.Row="0" Header="Ziel-OU auswählen" Margin="5">
-            <TreeView Name="OuTreeViewControl" Margin="5">
+            <TreeView Name="OuTreeViewControl" Margin="5"
+                      Drop="OuTreeView_Drop" 
+                      DragOver="OuTreeView_DragOver"
+                      AllowDrop="True">
                 <TreeView.Resources>
                     <Style TargetType="TreeViewItem">
                         <Style.Triggers>
@@ -70,6 +72,13 @@
                    Foreground="White"
                    BorderBrush="#FFD13438"
                    Click="CancelButton_Click" />
+           <Button Content="Hilfe"  
+                   Padding="15,8"  
+                   Margin="5"
+                   Background="#FF17A2B8"
+                   Foreground="White"
+                   BorderBrush="#FF138496"
+                   Click="HelpButton_Click" />
            <Button Content="Beenden"  
                    Padding="15,8"  
                    Margin="5"

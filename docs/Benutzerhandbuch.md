@@ -168,9 +168,8 @@ Das Protokoll zeigt wichtige Informationen:
 - Uhrzeit des Fehlers
 
 **Kontakt:**
-- **E-Mail**: it-support@lps-berlin.de
-- **Telefon**: [Interne Nummer]
-- **Ticket-System**: [Link zum System]
+- **E-Mail**: it@lps-berlin.de
+- **Ticket-System**: ticket@lps-berlin.de
 
 ### Informationen für Support
 ```
@@ -181,19 +180,6 @@ Fehler-Zeit: [Datum/Uhrzeit]
 Fehlermeldung: [Exakte Meldung]
 ```
 
-## 📚 Weiterführende Informationen
-
-### Active Directory Grundlagen
-- Was sind Organisationseinheiten (OUs)?
-- Computer-Objekte in AD
-- Berechtigungen und Sicherheit
-
-### Verwandte Tools
-- **Active Directory Users and Computers** (ADUC)
-- **PowerShell AD-Module**
-- **Group Policy Management Console**
-
----
 
 ## 📞 Schnellhilfe
 

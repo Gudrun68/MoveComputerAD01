@@ -6,10 +6,11 @@ Ein WPF-basiertes Tool zum Verwalten und Verschieben von Computerobjekten in Act
 
 - **Intuitive Benutzeroberfläche**: Moderne WPF-Anwendung mit TreeView-Navigation
 - **Sichere Authentifizierung**: Anmeldedialog für AD-Credentials mit Validierung
-- **Drag & Drop Funktionalität**: Einfaches Verschieben von Computern zwischen OUs
+- **Drag & Drop Funktionalität**: Einfaches Verschieben von Computern zwischen OUs (von links nach rechts)
 - **Mehrfache Fallback-Strategien**: DirectoryServices + PowerShell Integration
 - **Umfassende Protokollierung**: Detaillierte Logs aller Operationen
-- **Benutzerfreundliche Buttons**: Computer verschieben, Abbrechen, Beenden
+- **Benutzerfreundliche Buttons**: Computer verschieben, Abbrechen, Hilfe, Beenden
+- **Integrierte Hilfe**: HTML-Benutzerhandbuch mit Multi-Tier Fallback (lokal/online)
 - **Professionelle Architektur**: Service-orientierte Struktur mit Separation of Concerns
 
 ## 🏗️ Architektur
@@ -154,6 +155,7 @@ Dieses Projekt ist für interne Nutzung bei LPS-Berlin entwickelt.
 - **v1.0**: Initiale Version mit grundlegenden AD-Operationen
 - **v2.0**: Refaktorierung mit professioneller Architektur
 - **v2.1**: Credential-Dialog und verbesserte Fehlerbehandlung
+- **v2.2**: Hilfe-Button mit HTML-Benutzerhandbuch und korrigiertes Drag & Drop
 
 ## 📞 Support
 
