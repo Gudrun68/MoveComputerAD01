@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benutzerhandbuch - AD Computer Mover</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #0078d4;
+            border-bottom: 3px solid #0078d4;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 30px;
+            padding-left: 10px;
+            border-left: 4px solid #0078d4;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+        }
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+        }
+        .window-diagram {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .button-row {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primary { background-color: #0078d4; }
+        .btn-danger { background-color: #e81123; }
+        .btn-info { background-color: #17a2b8; }
+        .btn-secondary { background-color: #6c757d; }
+        
+        .status-icon {
+            font-size: 1.1em;
+            margin-right: 5px;
+        }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .info { color: #17a2b8; }
+        .warning { color: #ffc107; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .alert {
+            padding: 15px;
+            margin: 20px 0;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .alert-info {
+            color: #0c5460;
+            background-color: #d1ecf1;
+            border-color: #bee5eb;
+        }
+        .alert-warning {
+            color: #856404;
+            background-color: #fff3cd;
+            border-color: #ffeaa7;
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+        }
+        li {
+            margin: 5px 0;
+        }
+        
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .toc li {
+            margin: 8px 0;
+        }
+        .toc a {
+            color: #0078d4;
+            text-decoration: none;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><span class="emoji">📖</span>Benutzerhandbuch - AD Computer Mover</h1>
+        
+        <div class="toc">
+            <h3>Inhaltsverzeichnis</h3>
+            <ul>
+                <li><a href="#overview">📖 Übersicht</a></li>
+                <li><a href="#getting-started">🚀 Erste Schritte</a></li>
+                <li><a href="#moving-computers">🖱️ Computer verschieben</a></li>
+                <li><a href="#functions">🔧 Funktionen im Detail</a></li>
+                <li><a href="#protocol">📋 Protokoll verstehen</a></li>
+                <li><a href="#troubleshooting">❗ Häufige Probleme</a></li>
+                <li><a href="#tips">⚡ Tipps & Tricks</a></li>
+                <li><a href="#support">🆘 Support & Hilfe</a></li>
+                <li><a href="#quick-help">📞 Schnellhilfe</a></li>
+            </ul>
+        </div>
+
+        <h2 id="overview"><span class="emoji">📖</span>Übersicht</h2>
+        <p>Der AD Computer Mover ist eine benutzerfreundliche Anwendung zur Verwaltung von Computer-Objekten in Active Directory. Mit dieser Software können Sie Computer einfach zwischen verschiedenen Organisationseinheiten (OUs) verschieben.</p>
+
+        <h3><span class="emoji">🎯</span>Zielgruppe</h3>
+        <ul>
+            <li>IT-Administratoren</li>
+            <li>Helpdesk-Mitarbeiter</li>
+            <li>Benutzer mit AD-Verwaltungsrechten</li>
+        </ul>
+
+        <h2 id="getting-started"><span class="emoji">🚀</span>Erste Schritte</h2>
+        
+        <h3>1. Anwendung starten</h3>
+        <ol>
+            <li>Doppelklicken Sie auf <code>MoveComputerAD01.exe</code></li>
+            <li>Die Anwendung öffnet sich und zeigt das Hauptfenster</li>
+            <li>Ein Anmeldedialog erscheint automatisch</li>
+        </ol>
+
+        <h3>2. Anmeldung</h3>
+        <div class="alert alert-info">
+            <strong>Wichtig:</strong> Sie benötigen einen Benutzer mit Berechtigung zur Computer-Verwaltung!
+        </div>
+        
+        <p><strong>Felder ausfüllen:</strong></p>
+        <ul>
+            <li><strong>Domain</strong>: <code>lps-berlin</code> (bereits vorausgefüllt)</li>
+            <li><strong>Benutzername</strong>: Ihr AD-Benutzername</li>
+            <li><strong>Passwort</strong>: Ihr AD-Passwort</li>
+        </ul>
+
+        <h3>3. Hauptfenster verstehen</h3>
+        <p>Nach erfolgreicher Anmeldung sehen Sie das Hauptfenster:</p>
+        
+        <div class="window-diagram">┌─────────────────────────────────────────────────────────────┐
+│ AD Computer Mover                                    [_][□][×]│
+├─────────────────────────────────────────────────────────────┤
+│ [Computer verschieben] [Abbrechen] [Hilfe] [Beenden]        │
+├─────────────────┬───────────────────────────────────────────┤
+│ 📁 AD-Struktur │ 🏢 Organisationseinheiten               │
+│ ├─OU1          │ ├─ Computers                             │
+│ ├─OU2          │ ├─ Servers                               │
+│ └─💻Computer1   │ └─ Workstations                         │
+│                 │                                           │
+├─────────────────┴───────────────────────────────────────────┤
+│ 📄 Protokoll:                                              │
+│ [Log-Meldungen werden hier angezeigt...]                   │
+└─────────────────────────────────────────────────────────────┘</div>
+
+        <h4>Bereiche im Detail:</h4>
+        <ul>
+            <li><strong>Linke Seite</strong>: AD-Struktur mit Computern (💻 blau markiert)</li>
+            <li><strong>Rechte Seite</strong>: Organisationseinheiten (Ziel-OUs)</li>
+            <li><strong>Unten</strong>: Protokoll-Bereich für Status-Meldungen</li>
+        </ul>
+
+        <h2 id="moving-computers"><span class="emoji">🖱️</span>Computer verschieben</h2>
+
+        <h3>Methode 1: Drag & Drop (empfohlen)</h3>
+        <ol>
+            <li><strong>Computer auswählen</strong>: Klicken Sie auf einen Computer (💻) im linken Bereich</li>
+            <li><strong>Ziehen</strong>: Halten Sie die Maustaste gedrückt und ziehen den Computer</li>
+            <li><strong>Ablegen</strong>: Lassen Sie den Computer über der gewünschten OU im <strong>rechten Bereich</strong> los</li>
+            <li><strong>Automatische Verarbeitung</strong>: Die Verschiebung erfolgt sofort ohne weitere Bestätigung</li>
+        </ol>
+
+        <div class="alert alert-info">
+            <strong>Wichtig:</strong> Ziehen Sie Computer von links (AD-Struktur) nach rechts (Ziel-OUs)!
+        </div>
+
+        <h3>Methode 2: Button-Navigation</h3>
+        <ol>
+            <li><strong>Computer auswählen</strong>: Klicken Sie auf einen Computer im linken Bereich</li>
+            <li><strong>Ziel-OU wählen</strong>: Klicken Sie auf die gewünschte OU im rechten Bereich</li>
+            <li><strong>Verschieben</strong>: Klicken Sie auf "Computer verschieben"</li>
+            <li><strong>Bestätigen</strong>: Bestätigen Sie die Aktion im Dialog</li>
+        </ol>
+
+        <h2 id="functions"><span class="emoji">🔧</span>Funktionen im Detail</h2>
+
+        <div class="button-row">
+            <span class="btn btn-primary">Computer verschieben</span>
+            <span class="btn btn-danger">Abbrechen</span>
+            <span class="btn btn-info">Hilfe</span>
+            <span class="btn btn-secondary">Beenden</span>
+        </div>
+
+        <h3>Computer verschieben</h3>
+        <ul>
+            <li><strong>Zweck</strong>: Hauptaktion zum Verschieben von Computern</li>
+            <li><strong>Wann verwenden</strong>: Nach Auswahl von Computer und Ziel-OU</li>
+        </ul>
+
+        <h3>Abbrechen</h3>
+        <ul>
+            <li><strong>Zweck</strong>: Laufende Operationen stoppen</li>
+            <li><strong>Wann verwenden</strong>: Bei hängenden Vorgängen</li>
+        </ul>
+
+        <h3>Hilfe</h3>
+        <ul>
+            <li><strong>Zweck</strong>: Diese Benutzeranleitung öffnen</li>
+            <li><strong>Wann verwenden</strong>: Bei Fragen zur Bedienung</li>
+        </ul>
+
+        <h3>Beenden</h3>
+        <ul>
+            <li><strong>Zweck</strong>: Anwendung sauber schließen</li>
+            <li><strong>Wann verwenden</strong>: Wenn Sie die Arbeit beendet haben</li>
+            <li><strong>Funktion</strong>: Schließt die Anwendung ordnungsgemäß mit Cleanup</li>
+        </ul>
+
+        <h2 id="protocol"><span class="emoji">📋</span>Protokoll verstehen</h2>
+        <p>Das Protokoll zeigt wichtige Informationen:</p>
+
+        <div class="code-block">
+<span class="status-icon success">✅</span>Erfolgreich: Computer "PC001" nach "OU=Workstations" verschoben
+<span class="status-icon error">❌</span>Fehler: Berechtigung verweigert für Computer "PC002"
+<span class="status-icon info">ℹ️</span>Info: Verbindung zu Domain Controller hergestellt
+<span class="status-icon warning">⚠️</span>Warnung: Computer "PC003" nicht gefunden</div>
+
+        <h3>Symbol-Bedeutung:</h3>
+        <ul>
+            <li><span class="status-icon success">✅</span><strong>Erfolg</strong>: Operation erfolgreich abgeschlossen</li>
+            <li><span class="status-icon error">❌</span><strong>Fehler</strong>: Operation fehlgeschlagen</li>
+            <li><span class="status-icon info">ℹ️</span><strong>Information</strong>: Allgemeine Status-Meldung</li>
+            <li><span class="status-icon warning">⚠️</span><strong>Warnung</strong>: Potentielles Problem</li>
+        </ul>
+
+        <h2 id="troubleshooting"><span class="emoji">❗</span>Häufige Probleme</h2>
+
+        <h3>Problem: "Anmeldung fehlgeschlagen"</h3>
+        <div class="alert alert-warning">
+            <strong>Lösung:</strong>
+            <ol>
+                <li>Benutzername/Passwort prüfen</li>
+                <li>Domain-Verbindung testen</li>
+                <li>VPN-Verbindung prüfen (falls extern)</li>
+            </ol>
+        </div>
+
+        <h3>Problem: "Berechtigung verweigert"</h3>
+        <div class="alert alert-warning">
+            <strong>Lösung:</strong>
+            <ol>
+                <li>Mit IT-Administrator sprechen</li>
+                <li>Berechtigung für Computer-Verwaltung anfordern</li>
+                <li>Als anderer Benutzer anmelden</li>
+            </ol>
+        </div>
+
+        <h3>Problem: "Computer nicht gefunden"</h3>
+        <div class="alert alert-warning">
+            <strong>Lösung:</strong>
+            <ol>
+                <li>AD-Struktur aktualisieren</li>
+                <li>Computer-Name korrekt eingegeben?</li>
+                <li>Computer existiert im AD?</li>
+            </ol>
+        </div>
+
+        <h2 id="tips"><span class="emoji">⚡</span>Tipps & Tricks</h2>
+
+        <h3>Effizienter arbeiten</h3>
+        <ul>
+            <li><strong>Mehrfach-Auswahl</strong>: Strg+Klick für mehrere Computer</li>
+            <li><strong>Such-Funktion</strong>: Strg+F zum Suchen von Computern</li>
+            <li><strong>Keyboard-Navigation</strong>: Tab-Taste zum Navigieren</li>
+        </ul>
+
+        <h3>Sicherheit</h3>
+        <ul>
+            <li><strong>Immer bestätigen</strong>: Prüfen Sie vor dem Verschieben die Ziel-OU</li>
+            <li><strong>Backup-Strategie</strong>: Notieren Sie ursprüngliche OU vor Änderungen</li>
+            <li><strong>Test-Computer</strong>: Testen Sie mit unwichtigen Computern</li>
+        </ul>
+
+        <h2 id="support"><span class="emoji">🆘</span>Support & Hilfe</h2>
+
+        <h3>Selbsthilfe</h3>
+        <ol>
+            <li><strong>Protokoll prüfen</strong>: Schauen Sie sich die Fehlermeldungen genau an</li>
+            <li><strong>Neustart</strong>: Anwendung schließen und neu starten</li>
+            <li><strong>Aktualisieren</strong>: AD-Struktur neu laden</li>
+        </ol>
+
+        <h3>IT-Support kontaktieren</h3>
+        <p><strong>Vor dem Anruf sammeln:</strong></p>
+        <ul>
+            <li>Screenshot des Fehlers</li>
+            <li>Protokoll-Meldungen kopieren</li>
+            <li>Computer-Name und Ziel-OU notieren</li>
+            <li>Uhrzeit des Fehlers</li>
+        </ul>
+
+        <p><strong>Kontakt:</strong></p>
+        <ul>
+            <li><strong>E-Mail</strong>: it@lps-berlin.de</li>
+            <li><strong>Ticket-System</strong>: ticket@lps-berlin.de</li>
+        </ul>
+
+        <h2 id="quick-help"><span class="emoji">📞</span>Schnellhilfe</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Problem</th>
+                    <th>Lösung</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Kann mich nicht anmelden</td>
+                    <td>Benutzername/Passwort prüfen</td>
+                </tr>
+                <tr>
+                    <td>Computer wird nicht angezeigt</td>
+                    <td>AD-Struktur aktualisieren</td>
+                </tr>
+                <tr>
+                    <td>Drag & Drop funktioniert nicht</td>
+                    <td>Button-Methode verwenden</td>
+                </tr>
+                <tr>
+                    <td>Anwendung hängt</td>
+                    <td>Abbrechen-Button drücken</td>
+                </tr>
+                <tr>
+                    <td>Anwendung soll geschlossen werden</td>
+                    <td>Beenden-Button drücken</td>
+                </tr>
+                <tr>
+                    <td>Keine Berechtigung</td>
+                    <td>IT-Administrator kontaktieren</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+        <p><em>Für weitere Fragen wenden Sie sich an die IT-Abteilung von LPS-Berlin.</em></p>
+        
+        <div style="margin-top: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 4px;">
+            <p><strong>Version</strong>: 2.1<br>
+            <strong>Letzte Aktualisierung</strong>: August 2025<br>
+            <strong>Autor</strong>: IT-Abteilung LPS-Berlin</p>
+        </div>
+    </div>
+</body>
+</html>
