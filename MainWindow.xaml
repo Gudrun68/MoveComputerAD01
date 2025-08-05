@@ -12,7 +12,7 @@
        <Grid.RowDefinitions>  
            <RowDefinition Height="*"/>  
            <RowDefinition Height="Auto" MinHeight="40"/>  
-           <RowDefinition Height="Auto" MinHeight="100"/>  
+           <RowDefinition Height="100" MinHeight="100"/>  
        </Grid.RowDefinitions>
 
         <!-- Linke TreeView: AD-Struktur -->
