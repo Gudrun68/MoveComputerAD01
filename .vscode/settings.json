@@ -1,1 +1,4 @@
-{ "dotnet.defaultSolution": "MoveComputerAD01.sln" }
+{
+    "dotnet.defaultSolution": "MoveComputerAD01.sln",
+    "dotnet.preferCSharpExtension": true
+}
