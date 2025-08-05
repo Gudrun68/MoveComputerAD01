@@ -92,10 +92,9 @@ namespace MoveComputerAD01.Services
                             });
                         }
                         else if (child.SchemaClassName == "container" && 
-                                (child.Name.Equals("CN=Computers", StringComparison.OrdinalIgnoreCase) ||
-                                 child.Name.Equals("CN=Users", StringComparison.OrdinalIgnoreCase)))
+                                child.Name.Equals("CN=Computers", StringComparison.OrdinalIgnoreCase))
                         {
-                            // Standard-Container (Computers, Users) mit Computer-Objekten laden
+                            // Standard-Container (Computers) mit Computer-Objekten laden
                             objects.Add(new ADObject
                             {
                                 Name = child.Name,
@@ -152,11 +151,10 @@ namespace MoveComputerAD01.Services
                             });
                         }
                         else if (child.SchemaClassName == "container" && 
-                                (child.Name.Equals("CN=Computers", StringComparison.OrdinalIgnoreCase) ||
-                                 child.Name.Equals("CN=Users", StringComparison.OrdinalIgnoreCase)) &&
+                                child.Name.Equals("CN=Computers", StringComparison.OrdinalIgnoreCase) &&
                                 (HasComputers(child) || HasComputersRecursive(child)))
                         {
-                            // Standard-Container (Computers, Users) die Computer enthalten
+                            // Standard-Container (Computers) die Computer enthalten
                             objects.Add(new ADObject
                             {
                                 Name = child.Name,

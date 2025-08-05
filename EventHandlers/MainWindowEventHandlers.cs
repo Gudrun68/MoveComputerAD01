@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -75,10 +76,14 @@ namespace MoveComputerAD01.EventHandlers
                 string computerPath = selectedComputer.Tag.ToString();
                 string targetOUPath = selectedTargetOU.Tag.ToString();
 
+                // OU-Anzeigepfad für bessere Benutzerfreundlichkeit erstellen
+                string displayOUPath = GetDisplayPath(targetOUPath);
+
                 // 3. Benutzer-Bestätigung
                 var confirmResult = MessageBox.Show(
-                    $"Möchten Sie den Computer '{computerName}' wirklich verschieben?\n\n" +
-                    $"Ziel-OU: {selectedTargetOU.Header}",
+                    "Möchten Sie den Computer '" + computerName + "' wirklich verschieben?\n\n" +
+                    "Ziel-OU: " + selectedTargetOU.Header + "\n" +
+                    "Vollständiger Pfad: " + displayOUPath,
                     "Computer verschieben bestätigen",
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Question);
@@ -90,19 +95,19 @@ namespace MoveComputerAD01.EventHandlers
                 }
 
                 // 4. Verschiebung durchführen
-                _mainWindow.LogMessage($"Starte Verschiebung von '{computerName}'...");
-                _mainWindow.LogMessage($"Quell-Pfad: {computerPath}");
-                _mainWindow.LogMessage($"Ziel-Pfad: {targetOUPath}");
+                _mainWindow.LogMessage("Starte Verschiebung von '" + computerName + "'...");
+                _mainWindow.LogMessage("Quell-Pfad: " + computerPath);
+                _mainWindow.LogMessage("Ziel-Pfad: " + targetOUPath);
 
                 var result = _adService.MoveComputer(computerPath, targetOUPath);
 
                 // 5. Ergebnis verarbeiten
                 if (result.Success)
                 {
-                    _mainWindow.LogMessage($"✅ ERFOLG: {result.Message}");
-                    _mainWindow.LogMessage($"Methode: {result.Method}");
+                    _mainWindow.LogMessage(" ERFOLG: " + result.Message);
+                    _mainWindow.LogMessage("Methode: " + result.Method);
                     
-                    MessageBox.Show($"Computer '{computerName}' wurde erfolgreich verschoben!", 
+                    MessageBox.Show("Computer '" + computerName + "' wurde erfolgreich verschoben!", 
                                    "Verschiebung erfolgreich", 
                                    MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -111,15 +116,15 @@ namespace MoveComputerAD01.EventHandlers
                 }
                 else
                 {
-                    _mainWindow.LogMessage($"❌ FEHLER: {result.Message}");
+                    _mainWindow.LogMessage(" Fehler: " + result.Message);
                     
                     // Detaillierte Fehlermeldung
                     string detailErrors = result.Errors.Count > 0 
-                        ? $"\n\nDetails:\n{string.Join("\n", result.Errors)}" 
+                        ? "\n\nDetails:\n" + string.Join("\n", result.Errors)
                         : "";
 
                     var errorResult = MessageBox.Show(
-                        $"Fehler beim Verschieben von '{computerName}':\n\n{result.Message}{detailErrors}\n\n" +
+                        "Fehler beim Verschieben von '" + computerName + "':\n\n" + result.Message + detailErrors + "\n\n" +
                         "Möchten Sie den PowerShell-Befehl in die Zwischenablage kopieren?",
                         "Verschiebung fehlgeschlagen",
                         MessageBoxButton.YesNo,
@@ -127,7 +132,7 @@ namespace MoveComputerAD01.EventHandlers
 
                     if (errorResult == MessageBoxResult.Yes && !string.IsNullOrEmpty(result.ComputerDN))
                     {
-                        string psCommand = $"Move-ADObject -Identity \"{result.ComputerDN}\" -TargetPath \"{result.TargetDN}\"";
+                        string psCommand = "Move-ADObject -Identity \"" + result.ComputerDN + "\" -TargetPath \"" + result.TargetDN + "\"";
                         Clipboard.SetText(psCommand);
                         _mainWindow.LogMessage("PowerShell-Befehl in Zwischenablage kopiert.");
                         
@@ -139,8 +144,8 @@ namespace MoveComputerAD01.EventHandlers
             }
             catch (Exception ex)
             {
-                _mainWindow.LogMessage($"❌ UNERWARTETER FEHLER: {ex.Message}");
-                MessageBox.Show($"Unerwarteter Fehler:\n\n{ex.Message}\n\nDetails im Log verfügbar.",
+                _mainWindow.LogMessage(" UNERWARTETER FEHLER: " + ex.Message);
+                MessageBox.Show("Unerwarteter Fehler:\n\n" + ex.Message + "\n\nDetails im Log verfügbar.",
                                "Unerwarteter Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -179,7 +184,7 @@ namespace MoveComputerAD01.EventHandlers
                 if (System.IO.File.Exists(htmlPath))
                 {
                     System.Diagnostics.Process.Start(htmlPath);
-                    _mainWindow.LogMessage("✅ Benutzerhandbuch (HTML) geöffnet");
+                    _mainWindow.LogMessage(" Benutzerhandbuch (HTML) geöffnet");
                     return;
                 }
 
@@ -188,19 +193,19 @@ namespace MoveComputerAD01.EventHandlers
                 if (System.IO.File.Exists(mdPath))
                 {
                     System.Diagnostics.Process.Start(mdPath);
-                    _mainWindow.LogMessage("✅ Benutzerhandbuch (Markdown) geöffnet");
+                    _mainWindow.LogMessage(" Benutzerhandbuch (Markdown) geöffnet");
                     return;
                 }
 
                 // 3. Versuch: Online GitHub-Repository
                 string githubUrl = "https://github.com/Gudrun68/MoveComputerAD01#readme";
                 System.Diagnostics.Process.Start(githubUrl);
-                _mainWindow.LogMessage("✅ Online-Dokumentation geöffnet");
+                _mainWindow.LogMessage(" Online-Dokumentation geöffnet");
             }
             catch (Exception ex)
             {
-                _mainWindow.LogMessage($"❌ Fehler beim Öffnen der Hilfe: {ex.Message}");
-                MessageBox.Show($"Fehler beim Öffnen der Hilfe:\n\n{ex.Message}\n\n" +
+                _mainWindow.LogMessage(" Fehler beim Öffnen der Hilfe: " + ex.Message);
+                MessageBox.Show("Fehler beim Öffnen der Hilfe:\n\n" + ex.Message + "\n\n" +
                                "Weitere Informationen finden Sie unter:\n" +
                                "https://github.com/Gudrun68/MoveComputerAD01",
                                "Hilfe-Fehler", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -242,27 +247,27 @@ namespace MoveComputerAD01.EventHandlers
                     targetItem.Tag is string targetPath &&
                     !targetItem.Header.ToString().StartsWith("💻 "))
                 {
-                    _mainWindow.LogMessage($"Drag & Drop: Verschiebe '{computerName}'...");
+                    _mainWindow.LogMessage("Drag & Drop: Verschiebe '" + computerName + "'...");
                     
                     var result = _adService.MoveComputer(computerPath, targetPath);
                     
                     if (result.Success)
                     {
-                        _mainWindow.LogMessage($"✅ D&D ERFOLG: {result.Message}");
+                        _mainWindow.LogMessage(" D&D ERFOLG: " + result.Message);
                         _mainWindow.RefreshTreeViews();
                     }
                     else
                     {
-                        _mainWindow.LogMessage($"❌ D&D FEHLER: {result.Message}");
-                        MessageBox.Show($"Drag & Drop Fehler: {result.Message}", "Fehler", 
+                        _mainWindow.LogMessage(" D&D FEHLER: " + result.Message);
+                        MessageBox.Show("Drag & Drop Fehler: " + result.Message, "Fehler", 
                                        MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
             catch (Exception ex)
             {
-                _mainWindow.LogMessage($"❌ D&D EXCEPTION: {ex.Message}");
-                MessageBox.Show($"Drag & Drop Fehler: {ex.Message}", "Fehler", 
+                _mainWindow.LogMessage(" D&D EXCEPTION: " + ex.Message);
+                MessageBox.Show("Drag & Drop Fehler: " + ex.Message, "Fehler", 
                                MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
@@ -296,7 +301,7 @@ namespace MoveComputerAD01.EventHandlers
             if (e.LeftButton == MouseButtonState.Pressed && _draggedItem != null)
             {
                 var item = _draggedItem;
-                if (item?.Tag is string computerPath && item.Header.ToString().Contains("💻"))
+                if (item?.Tag is string computerPath && item.Header.ToString().Contains(""))
                 {
                     // Drag-Operation starten
                     var data = new DataObject(DataFormats.StringFormat, computerPath);
@@ -325,31 +330,31 @@ namespace MoveComputerAD01.EventHandlers
                     string computerPath = _draggedItem.Tag as string;
                     string computerName = _draggedItem.Header.ToString().Replace("💻 ", "");
 
-                    _mainWindow.LogMessage($"Drag & Drop: Verschiebe '{computerName}' nach '{targetItem.Header}'...");
+                    _mainWindow.LogMessage("Drag & Drop: Verschiebe '" + computerName + "' nach '" + targetItem.Header + "'...");
 
                     // Verschiebung durchführen
                     var result = _adService.MoveComputer(computerPath, targetOuPath);
 
                     if (result.Success)
                     {
-                        _mainWindow.LogMessage($"✅ ERFOLG: {result.Message}");
-                        MessageBox.Show($"Computer '{computerName}' wurde erfolgreich verschoben!", 
+                        _mainWindow.LogMessage(" ERFOLG: " + result.Message);
+                        MessageBox.Show("Computer '" + computerName + "' wurde erfolgreich verschoben!", 
                                        "Drag & Drop erfolgreich", 
                                        MessageBoxButton.OK, MessageBoxImage.Information);
                         _mainWindow.RefreshTreeViews();
                     }
                     else
                     {
-                        _mainWindow.LogMessage($"❌ FEHLER: {result.Message}");
-                        MessageBox.Show($"Drag & Drop Fehler: {result.Message}", "Fehler", 
+                        _mainWindow.LogMessage(" Fehler: " + result.Message);
+                        MessageBox.Show("Drag & Drop Fehler: " + result.Message, "Fehler", 
                                        MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
             catch (Exception ex)
             {
-                _mainWindow.LogMessage($"❌ Drag & Drop Fehler: {ex.Message}");
-                MessageBox.Show($"Drag & Drop Fehler: {ex.Message}", "Fehler", 
+                _mainWindow.LogMessage(" Drag & Drop Fehler: " + ex.Message);
+                MessageBox.Show("Drag & Drop Fehler: " + ex.Message, "Fehler", 
                                MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
@@ -375,5 +380,39 @@ namespace MoveComputerAD01.EventHandlers
         }
 
         #endregion
+
+        #region Private Hilfsmethoden
+
+        /// <summary>
+        /// Konvertiert einen Distinguished Name in einen benutzerfreundlichen Pfad
+        /// </summary>
+        /// <param name="distinguishedName">DN der OU</param>
+        /// <returns>Benutzerfreundlicher Pfad (z.B. "Root  Parent  Target")</returns>
+        private string GetDisplayPath(string distinguishedName)
+        {
+            if (string.IsNullOrEmpty(distinguishedName))
+                return "";
+
+            try
+            {
+                // DN in Komponenten aufteilen und OU-Teile extrahieren
+                var ouComponents = distinguishedName
+                    .Split(',')
+                    .Where(part => part.Trim().StartsWith("OU=", StringComparison.OrdinalIgnoreCase))
+                    .Select(part => part.Trim().Substring(3)) // "OU=" entfernen
+                    .Reverse() // Reihenfolge umkehren (von Root zu Ziel)
+                    .ToArray();
+
+                return ouComponents.Length > 0 ? string.Join("  ", ouComponents) : distinguishedName;
+            }
+            catch
+            {
+                // Fallback: Original DN zurückgeben
+                return distinguishedName;
+            }
+        }
+
+        #endregion
     }
 }
+
